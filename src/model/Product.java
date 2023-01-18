@@ -14,6 +14,7 @@ public class Product {
     private String category;
     private String price;
 
+
     public int getId() {
         return id;
     }

@@ -14,15 +14,16 @@ import dao.UserDao;
  */
 public class Signup extends javax.swing.JFrame {
 
-    public String emailPattern = "^[a-zA-Z0-9.]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z0-9]+$";
+    public String emailPattern = "^[a-zA-Z0-9.]+[@]+[a-zA-Z0-9]+[.]+[-]+[a-zA-Z0-9]+$";
     public String phoneNumberPattern = "^[0-9]*$";
 
     /**
-     * Creates new form Singup
+     * Creates new form Signup
      */
     public Signup() {
         initComponents();
-        btnSave.setEnabled(false);
+        setLocationRelativeTo(null);
+        //btnSave.setEnabled(false);
     }
 
     public void clear() {
@@ -33,7 +34,7 @@ public class Signup extends javax.swing.JFrame {
         txtSecurityQuestion.setText("");
         txtAnswer.setText("");
         txtPassword.setText("");
-        btnSave.setEnabled(false);
+        //btnSave.setEnabled(false);
     }
 
     public void validateFields() {
@@ -283,37 +284,37 @@ public class Signup extends javax.swing.JFrame {
 
     private void txtNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyReleased
         // TODO add your handling code here:
-        validateFields();
+        //validateFields();
     }//GEN-LAST:event_txtNameKeyReleased
 
     private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
         // TODO add your handling code here:
-        validateFields();
+        //validateFields();
     }//GEN-LAST:event_txtEmailKeyReleased
 
     private void txtPhoneNumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneNumberKeyReleased
         // TODO add your handling code here:
-        validateFields();
+        //validateFields();
     }//GEN-LAST:event_txtPhoneNumberKeyReleased
 
     private void txtAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAddressKeyReleased
         // TODO add your handling code here:
-        validateFields();
+        //validateFields();
     }//GEN-LAST:event_txtAddressKeyReleased
 
     private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
         // TODO add your handling code here:
-        validateFields();
+        //validateFields();
     }//GEN-LAST:event_txtPasswordKeyReleased
 
     private void txtSecurityQuestionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSecurityQuestionKeyReleased
         // TODO add your handling code here:
-        validateFields();
+        //validateFields();
     }//GEN-LAST:event_txtSecurityQuestionKeyReleased
 
     private void txtAnswerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnswerKeyReleased
         // TODO add your handling code here:
-        validateFields();
+        //validateFields();
     }//GEN-LAST:event_txtAnswerKeyReleased
 
     /**

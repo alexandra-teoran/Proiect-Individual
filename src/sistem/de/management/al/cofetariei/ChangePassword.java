@@ -18,10 +18,12 @@ public class ChangePassword extends javax.swing.JFrame {
      */
     public ChangePassword() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     public ChangePassword(String email) {
         initComponents();
+        setLocationRelativeTo(null);
         userEmail=email;
         btnUpdate.setEnabled(false);
     }
@@ -132,7 +134,7 @@ public class ChangePassword extends javax.swing.JFrame {
         getContentPane().add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(379, 207, -1, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/small-page-background.jpeg"))); // NOI18N
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

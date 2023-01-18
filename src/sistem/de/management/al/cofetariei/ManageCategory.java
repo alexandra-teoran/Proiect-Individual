@@ -20,6 +20,7 @@ public class ManageCategory extends javax.swing.JFrame {
      */
     public ManageCategory() {
         initComponents();
+        setLocationRelativeTo(null);
         btnSave.setEnabled(false);
     }
     

@@ -34,8 +34,8 @@ public class PlaceOrder extends javax.swing.JFrame {
     public int grandTotal=0;
     public int productPrice=0;
     public int productTotal=0;
-    public String emailPattern="^[a-zA-Z0-9.]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z0-9]+$";
-    public String phoneNumberPattern="^[0-9]*$";
+    public String emailPattern="^[a-zA-Z0-9.]+[@]+[a-zA-Z0-9]+[.]+[-]+[a-zA-Z0-9]+$";
+    public String phonePattern="^[0-9]*$";
     public String userEmail;
 
     /**
@@ -43,17 +43,19 @@ public class PlaceOrder extends javax.swing.JFrame {
      */
     public PlaceOrder() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     
     public PlaceOrder(String email) {
         initComponents();
-        txtProductName.setEditable(false);
-        txtProductPrice.setEditable(false);
-        txtProductTotal.setEditable(false);
-        btnAddToCart.setEnabled(false);
-        btnGenerateBill.setEnabled(false);
+        setLocationRelativeTo(null);
+        txtProName.setEditable(false);
+        txtProPrice.setEditable(false);
+        txtProTotal.setEditable(false);
+        //btnAddToCart.setEnabled(false);
+        //btnGenerateBill.setEnabled(false);
         JFormattedTextField tf=((JSpinner.DefaultEditor) jSpinner1.getEditor()).getTextField();
-        tf.setEnabled(false);
+        tf.setEditable(false);
         userEmail=email;
     }
     
@@ -63,40 +65,41 @@ public class PlaceOrder extends javax.swing.JFrame {
         ArrayList<Product> list=ProductDao.getAllRecordsByCategory(category);
         Iterator<Product> it=list.iterator();
         while(it.hasNext()){
-            Product productObj=new Product();
+            Product productObj=it.next();
             dtm.addRow(new Object[]{productObj.getName()});
         }
     }
-
-    public void filterProductByName(String name, String category) {
+    
+     public void filterProductByName(String name, String category) {
         DefaultTableModel dtm=(DefaultTableModel) jTable1.getModel();
         dtm.setRowCount(0);
         ArrayList<Product> list=ProductDao.filterProductByName(name, category);
         Iterator<Product> it=list.iterator();
         while(it.hasNext()){
-            Product productObj=new Product();
+            Product productObj=it.next();
             dtm.addRow(new Object[]{productObj.getName()});
         }
     }
-    
-    public void clearProductFields() {
-        txtProductName.setText("");
-        txtProductPrice.setText("");
-        jSpinner1.setValue(1);
-        txtProductTotal.setText("");
-        btnAddToCart.setEnabled(false);
-    }
-    
-    public void validateField() {
-        String customerName=txtCustomerName.getText();
-        String customerPhoneNumber=txtCustomerPhoneNumber.getText();
-        String customerEmail=txtCustomerName.getText();
-        if(!customerEmail.equals("") && customerPhoneNumber.matches(phoneNumberPattern) && customerPhoneNumber.length()==10 && customerEmail.matches(emailPattern) && grandTotal>0)
-            btnGenerateBill.setEnabled(true);
-        else
-            btnGenerateBill.setEnabled(false);
-    }
-    
+     
+     public void clearProductFields(){
+         txtProName.setText("");
+         txtProPrice.setText("");
+         jSpinner1.setValue(1);
+         txtProTotal.setText("");
+         //btnAddToCart.setEnabled(false);
+     }
+     
+     public void validateFields(){
+         String customerName=txtCusName.getText();
+         String customerNumber=txtCusNumber.getText();
+         String customerEmail=txtCusEmail.getText();
+         if(!customerEmail.equals("") && customerNumber.matches(phonePattern) && customerNumber.length()==10 && customerEmail.matches(emailPattern) && grandTotal>0)
+             btnGenerateBill.setEnabled(true);
+         //else
+             //btnGenerateBill.setEnabled(false);
+         
+     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,11 +115,11 @@ public class PlaceOrder extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtCustomerName = new javax.swing.JTextField();
+        txtCusName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtCustomerPhoneNumber = new javax.swing.JTextField();
+        txtCusNumber = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtCustomerEmail = new javax.swing.JTextField();
+        txtCusEmail = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
@@ -124,21 +127,21 @@ public class PlaceOrder extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
-        txtProductName = new javax.swing.JTextField();
+        txtProName = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtProductPrice = new javax.swing.JTextField();
+        txtProPrice = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel13 = new javax.swing.JLabel();
-        txtProductTotal = new javax.swing.JTextField();
+        txtProTotal = new javax.swing.JTextField();
         btnClear = new javax.swing.JButton();
         btnAddToCart = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        lbl = new javax.swing.JLabel();
-        lbGrandTotal = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        lblGrandTotal = new javax.swing.JLabel();
         btnGenerateBill = new javax.swing.JButton();
-        jLabel16 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -152,7 +155,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/place order.png"))); // NOI18N
         jLabel1.setText("Place Order");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 46, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 43, -1, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/close.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -164,60 +167,55 @@ public class PlaceOrder extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Bill ID:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 121, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 113, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("--");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(197, 121, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 113, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Customer Details:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 162, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 154, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Name:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 203, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 195, -1, -1));
 
-        txtCustomerName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtCustomerName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCustomerNameActionPerformed(evt);
-            }
-        });
-        txtCustomerName.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCusName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtCusName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCustomerNameKeyReleased(evt);
+                txtCusNameKeyReleased(evt);
             }
         });
-        getContentPane().add(txtCustomerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 241, 162, -1));
+        getContentPane().add(txtCusName, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 233, 159, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("Phone number:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 285, -1, -1));
+        jLabel6.setText("Phone Number:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 277, -1, -1));
 
-        txtCustomerPhoneNumber.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtCustomerPhoneNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCusNumber.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtCusNumber.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCustomerPhoneNumberKeyReleased(evt);
+                txtCusNumberKeyReleased(evt);
             }
         });
-        getContentPane().add(txtCustomerPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 323, 162, -1));
+        getContentPane().add(txtCusNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 315, 159, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Email:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 367, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 359, -1, -1));
 
-        txtCustomerEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtCustomerEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCusEmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtCusEmail.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCustomerEmailKeyReleased(evt);
+                txtCusEmailKeyReleased(evt);
             }
         });
-        getContentPane().add(txtCustomerEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 399, 162, -1));
+        getContentPane().add(txtCusEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 397, 159, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Category:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 121, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 113, -1, -1));
 
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -225,11 +223,11 @@ public class PlaceOrder extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 159, 160, -1));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 151, 160, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Search:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 203, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 195, -1, -1));
 
         txtSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -237,8 +235,9 @@ public class PlaceOrder extends javax.swing.JFrame {
                 txtSearchKeyReleased(evt);
             }
         });
-        getContentPane().add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 241, 160, -1));
+        getContentPane().add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 233, 160, -1));
 
+        jTable1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -254,25 +253,25 @@ public class PlaceOrder extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 285, 355, 295));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 277, 300, 259));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setText("Name:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(896, 121, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(711, 113, -1, -1));
 
-        txtProductName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(txtProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(895, 159, 160, -1));
+        txtProName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        getContentPane().add(txtProName, new org.netbeans.lib.awtextra.AbsoluteConstraints(711, 151, 160, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setText("Price:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(1152, 121, 43, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 113, -1, -1));
 
-        txtProductPrice.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(txtProductPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(1152, 159, 160, -1));
+        txtProPrice.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        getContentPane().add(txtProPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 151, 160, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel12.setText("Quantity:");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(895, 203, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(711, 195, -1, -1));
 
         jSpinner1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -280,14 +279,14 @@ public class PlaceOrder extends javax.swing.JFrame {
                 jSpinner1StateChanged(evt);
             }
         });
-        getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(895, 241, 160, -1));
+        getContentPane().add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(711, 233, 160, -1));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("Total:");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1152, 203, 43, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 195, 43, -1));
 
-        txtProductTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(txtProductTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1152, 236, 160, -1));
+        txtProTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        getContentPane().add(txtProTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 233, 160, -1));
 
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/clear.png"))); // NOI18N
@@ -297,7 +296,7 @@ public class PlaceOrder extends javax.swing.JFrame {
                 btnClearActionPerformed(evt);
             }
         });
-        getContentPane().add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(895, 285, -1, -1));
+        getContentPane().add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(711, 277, -1, -1));
 
         btnAddToCart.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAddToCart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/add to cart.png"))); // NOI18N
@@ -307,8 +306,9 @@ public class PlaceOrder extends javax.swing.JFrame {
                 btnAddToCartActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAddToCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 285, -1, -1));
+        getContentPane().add(btnAddToCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(1018, 277, -1, -1));
 
+        jTable2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -324,15 +324,15 @@ public class PlaceOrder extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(879, 330, 465, 250));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 320, 530, 214));
 
-        lbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbl.setText("Grand Total: Rs.");
-        getContentPane().add(lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 600, -1, -1));
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setText("Total Price:");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 560, -1, -1));
 
-        lbGrandTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbGrandTotal.setText("00");
-        getContentPane().add(lbGrandTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 600, -1, -1));
+        lblGrandTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblGrandTotal.setText("000");
+        getContentPane().add(lblGrandTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 560, -1, -1));
 
         btnGenerateBill.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnGenerateBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/generate bill & print.png"))); // NOI18N
@@ -342,16 +342,13 @@ public class PlaceOrder extends javax.swing.JFrame {
                 btnGenerateBillActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGenerateBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 600, -1, -1));
+        getContentPane().add(btnGenerateBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 560, -1, -1));
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/full-page-background.jpeg"))); // NOI18N
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 770));
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/full-page-background.jpeg"))); // NOI18N
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtCustomerNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerNameActionPerformed
-    }//GEN-LAST:event_txtCustomerNameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -386,10 +383,10 @@ public class PlaceOrder extends javax.swing.JFrame {
         TableModel model=jTable1.getModel();
         String productName=model.getValueAt(index, 0).toString();
         Product product=ProductDao.getProductByName(productName);
-        txtProductName.setText(product.getName());
-        txtProductPrice.setText(product.getPrice());
+        txtProName.setText(product.getName());
+        txtProPrice.setText(product.getPrice());
         jSpinner1.setValue(1);
-        txtProductTotal.setText(product.getPrice());
+        txtProTotal.setText(product.getPrice());
         productPrice=Integer.parseInt(product.getPrice());
         productTotal=Integer.parseInt(product.getPrice());
         btnAddToCart.setEnabled(true);
@@ -403,7 +400,7 @@ public class PlaceOrder extends javax.swing.JFrame {
             quantity=1;
         }
         productTotal=productPrice*quantity;
-        txtProductTotal.setText(String.valueOf(productTotal));
+        txtProTotal.setText(String.valueOf(productTotal));
     }//GEN-LAST:event_jSpinner1StateChanged
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -414,15 +411,15 @@ public class PlaceOrder extends javax.swing.JFrame {
 
     private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
         // TODO add your handling code here:
-        String name=txtProductName.getText();
-        String price=txtProductPrice.getText();
+        String name=txtProName.getText();
+        String price=txtProPrice.getText();
         String quantity=String.valueOf(jSpinner1.getValue());
         DefaultTableModel dtm=(DefaultTableModel) jTable2.getModel();
         dtm.addRow(new Object[]{name, price, quantity, productTotal});
         grandTotal+=productTotal;
-        lbGrandTotal.setText(String.valueOf(grandTotal));
+        lblGrandTotal.setText(String.valueOf(grandTotal));
         clearProductFields();
-        validateField();
+        validateFields();
     }//GEN-LAST:event_btnAddToCartActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -430,53 +427,53 @@ public class PlaceOrder extends javax.swing.JFrame {
         clearProductFields();
     }//GEN-LAST:event_btnClearActionPerformed
 
-    private void txtCustomerNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustomerNameKeyReleased
+    private void txtCusNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCusNameKeyReleased
         // TODO add your handling code here:
-        validateField();
-    }//GEN-LAST:event_txtCustomerNameKeyReleased
+        validateFields();
+    }//GEN-LAST:event_txtCusNameKeyReleased
 
-    private void txtCustomerPhoneNumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustomerPhoneNumberKeyReleased
+    private void txtCusNumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCusNumberKeyReleased
         // TODO add your handling code here:
-        validateField();
-    }//GEN-LAST:event_txtCustomerPhoneNumberKeyReleased
+        validateFields();
+    }//GEN-LAST:event_txtCusNumberKeyReleased
 
-    private void txtCustomerEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCustomerEmailKeyReleased
+    private void txtCusEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCusEmailKeyReleased
         // TODO add your handling code here:
-        validateField();
-    }//GEN-LAST:event_txtCustomerEmailKeyReleased
+        validateFields();
+    }//GEN-LAST:event_txtCusEmailKeyReleased
 
     private void btnGenerateBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateBillActionPerformed
         // TODO add your handling code here:
-        String customerName=txtCustomerName.getText();
-        String customerPhoneNumber=txtCustomerPhoneNumber.getText();
-        String customerEmail=txtCustomerEmail.getText();
-        SimpleDateFormat dFormat=new SimpleDateFormat("dd-MM-yyyy");
+        String customerName=txtCusName.getText();
+        String customerNumber=txtCusNumber.getText();
+        String customerEmail=txtCusEmail.getText();
+        SimpleDateFormat dformat=new SimpleDateFormat("dd/MM/yyyy");
         Date date=new Date();
-        String today=dFormat.format(date);
+        String today=dformat.format(date);
         String total=String.valueOf(grandTotal);
         String createdBy=userEmail;
         Bill bill=new Bill();
         bill.setId(billId);
         bill.setName(customerName);
-        bill.setPhoneNumber(customerPhoneNumber);
+        bill.setPhoneNumber(customerNumber);
         bill.setEmail(customerEmail);
         bill.setDate(today);
         bill.setTotal(total);
         bill.setCreatedBy(createdBy);
         BillDao.save(bill);
         
-        //creating document
-        String path="E:\\";
+        //create document
+        String path="C:\\Users\\teora\\Desktop\\bills\\";
         com.itextpdf.text.Document doc=new com.itextpdf.text.Document();
         try{
             PdfWriter.getInstance(doc, new FileOutputStream(path + "" + billId + ".pdf"));
             doc.open();
-            Paragraph cafeName=new Paragraph("                                                                       Cafe Management System\n");
-            doc.add(cafeName);
+            Paragraph cakeShopName=new Paragraph("                                                          Cake Shop Management System\n");
+            doc.add(cakeShopName);
             Paragraph newLine=new Paragraph("\n");
             doc.add(newLine);
-            Paragraph paragraph3=new Paragraph("\tBill ID: "+billId+"\nCustomer Name: "+customerName+"\nTotal Paid:"+grandTotal+"");
-            doc.add(paragraph3);
+            Paragraph p3=new Paragraph("\tBill ID: "+billId+"\nCustomer Name: "+customerName+"\n TotalPaid: "+grandTotal+"");
+            doc.add(p3);
             doc.add(newLine);
             PdfPTable tb1=new PdfPTable(4);
             tb1.addCell("Name");
@@ -484,19 +481,21 @@ public class PlaceOrder extends javax.swing.JFrame {
             tb1.addCell("Quantity");
             tb1.addCell("Total");
             for(int i=0; i<jTable2.getRowCount(); i++){
-                String n=jTable2.getValueAt(i, 0).toString();
-                String d=jTable2.getValueAt(i, 1).toString();
-                String r=jTable2.getValueAt(i, 2).toString();
-                String q=jTable2.getValueAt(i, 3).toString();
-                tb1.addCell(n);
-                tb1.addCell(d);
-                tb1.addCell(r);
-                tb1.addCell(q);
+                String n1=jTable2.getValueAt(i, 0).toString();
+                String n2=jTable2.getValueAt(i, 1).toString();
+                String n3=jTable2.getValueAt(i, 2).toString();
+                String n4=jTable2.getValueAt(i, 3).toString();
+                tb1.addCell(n1);
+                tb1.addCell(n2);
+                tb1.addCell(n3);
+                tb1.addCell(n4);
             }
             doc.add(tb1);
             doc.add(newLine);
-            Paragraph thanksMsg=new Paragraph("Thank you for your purchase!");
-            doc.add(thanksMsg);
+            Paragraph thanks=new Paragraph("Thank you for your purchase!");
+            doc.add(thanks);
+            
+            //open pdf
             OpenPdf.openById(String.valueOf(billId));
         }
         catch(Exception e){
@@ -515,7 +514,7 @@ public class PlaceOrder extends javax.swing.JFrame {
             TableModel model=jTable2.getModel();
             String total=model.getValueAt(index, 3).toString();
             grandTotal-=Integer.parseInt(total);
-            lbGrandTotal.setText(String.valueOf(grandTotal));
+            lblGrandTotal.setText(String.valueOf(grandTotal));
             ((DefaultTableModel) jTable2.getModel()).removeRow(index);
         }
     }//GEN-LAST:event_jTable2MouseClicked
@@ -566,7 +565,8 @@ public class PlaceOrder extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -580,14 +580,13 @@ public class PlaceOrder extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JLabel lbGrandTotal;
-    private javax.swing.JLabel lbl;
-    private javax.swing.JTextField txtCustomerEmail;
-    private javax.swing.JTextField txtCustomerName;
-    private javax.swing.JTextField txtCustomerPhoneNumber;
-    private javax.swing.JTextField txtProductName;
-    private javax.swing.JTextField txtProductPrice;
-    private javax.swing.JTextField txtProductTotal;
+    private javax.swing.JLabel lblGrandTotal;
+    private javax.swing.JTextField txtCusEmail;
+    private javax.swing.JTextField txtCusName;
+    private javax.swing.JTextField txtCusNumber;
+    private javax.swing.JTextField txtProName;
+    private javax.swing.JTextField txtProPrice;
+    private javax.swing.JTextField txtProTotal;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

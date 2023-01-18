@@ -74,6 +74,24 @@ public class UserDao {
         return arrayList;
     }
     
+    public static User getUser(String email) {
+        User user=new User();
+        try{
+            ResultSet rs=BdOperations.getData("select * from user where email like '%"+email+"%'");
+            user.setId(rs.getInt("id"));
+            user.setName(rs.getString("nume"));
+            user.setEmail(rs.getString("email"));
+            user.setPhoneNumber(rs.getString("nrTelefon"));
+            user.setAddress(rs.getString("adresa"));
+            user.setSecurityQuestion(rs.getString("intrebareDeSecuritate"));
+            user.setStatus(rs.getString("status"));
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return user;
+    }
+    
     public static void changeStatus(String email, String status) {
         String query="update user set status='"+status+"' where email='"+email+"'";
         BdOperations.setDataOrDelete(query, "Status Changed Successfully");

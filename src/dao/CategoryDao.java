@@ -22,8 +22,8 @@ public class CategoryDao {
             ResultSet rs=BdOperations.getData("select * from category");
             while(rs.next()){
                 Category category=new Category();
-                category.setId(rs.getInt("id"));
-                category.setName(rs.getString("name"));
+                category.setId(rs.getInt(1));
+                category.setName(rs.getString(2));
                 arrayList.add(category);
             }
         }

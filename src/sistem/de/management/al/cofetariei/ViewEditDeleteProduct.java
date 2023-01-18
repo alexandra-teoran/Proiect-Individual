@@ -25,6 +25,7 @@ public class ViewEditDeleteProduct extends javax.swing.JFrame {
      */
     public ViewEditDeleteProduct() {
         initComponents();
+        setLocationRelativeTo(null);
         btnUpdate.setEnabled(false);
         btnDelete.setEnabled(false);
     }
@@ -86,7 +87,7 @@ public class ViewEditDeleteProduct extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 0, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1326, 0, 40, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("ID:");
@@ -173,7 +174,7 @@ public class ViewEditDeleteProduct extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(811, 168, -1, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 170, 550, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/full-page-background.jpeg"))); // NOI18N
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

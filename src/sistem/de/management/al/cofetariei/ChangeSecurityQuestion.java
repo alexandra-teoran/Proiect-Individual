@@ -19,10 +19,12 @@ public class ChangeSecurityQuestion extends javax.swing.JFrame {
      */
     public ChangeSecurityQuestion() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     
     public ChangeSecurityQuestion(String email) {
         initComponents();
+        setLocationRelativeTo(null);
         userEmail=email;
         txtOldSQ.setEditable(false);
         btnUpdate.setEnabled(false);

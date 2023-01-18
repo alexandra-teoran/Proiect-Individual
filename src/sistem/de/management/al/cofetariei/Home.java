@@ -18,12 +18,14 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     
     public Home(String email) {
         initComponents();
+        setLocationRelativeTo(null);
         this.email=email;
-        if(!this.email.equals("admin@gmail.com")){
+        if(!this.email.equals("teoranalexandra0@gmail.com")){
             btnCategory.setVisible(false);
             btnNewProduct.setVisible(false);
             btnViewEditDelete.setVisible(false);
@@ -42,7 +44,7 @@ public class Home extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnViewBill = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -51,6 +53,7 @@ public class Home extends javax.swing.JFrame {
         btnNewProduct = new javax.swing.JButton();
         btnViewEditDelete = new javax.swing.JButton();
         btnVerifyUsers = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,7 +68,7 @@ public class Home extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 180, 80));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/place order.png"))); // NOI18N
@@ -75,17 +78,17 @@ public class Home extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 180, 80));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/View Bills & Order Placed Details.png"))); // NOI18N
-        jButton3.setText("View Bills and Order Details");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnViewBill.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnViewBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/View Bills & Order Placed Details.png"))); // NOI18N
+        btnViewBill.setText("View Bills and Order Details");
+        btnViewBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnViewBillActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, -1, -1));
+        getContentPane().add(btnViewBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 260, 80));
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/change Password.png"))); // NOI18N
@@ -95,7 +98,7 @@ public class Home extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, -1, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 190, 80));
 
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/change Security Question.png"))); // NOI18N
@@ -105,7 +108,7 @@ public class Home extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 30, -1, -1));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 240, 80));
 
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/exit.png"))); // NOI18N
@@ -115,12 +118,17 @@ public class Home extends javax.swing.JFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 30, -1, -1));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 10, 160, 80));
 
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/review.png"))); // NOI18N
         jButton7.setText("Give a Review");
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, -1, 46));
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 230, 80));
 
         btnCategory.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCategory.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/category.png"))); // NOI18N
@@ -130,7 +138,7 @@ public class Home extends javax.swing.JFrame {
                 btnCategoryActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 650, -1, -1));
+        getContentPane().add(btnCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 60, 260, 90));
 
         btnNewProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnNewProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/new product.png"))); // NOI18N
@@ -140,7 +148,7 @@ public class Home extends javax.swing.JFrame {
                 btnNewProductActionPerformed(evt);
             }
         });
-        getContentPane().add(btnNewProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 650, -1, -1));
+        getContentPane().add(btnNewProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 180, 260, 90));
 
         btnViewEditDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnViewEditDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/view edit delete product.png"))); // NOI18N
@@ -150,7 +158,7 @@ public class Home extends javax.swing.JFrame {
                 btnViewEditDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnViewEditDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 650, -1, -1));
+        getContentPane().add(btnViewEditDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 300, -1, 80));
 
         btnVerifyUsers.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnVerifyUsers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/verify users.png"))); // NOI18N
@@ -160,10 +168,20 @@ public class Home extends javax.swing.JFrame {
                 btnVerifyUsersActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVerifyUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 650, -1, -1));
+        getContentPane().add(btnVerifyUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 410, 260, 80));
+
+        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/see review.jpg"))); // NOI18N
+        jButton8.setText("See Reviews");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, 230, 80));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagini/home-page.jpeg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -200, -1, 1170));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -210,10 +228,10 @@ public class Home extends javax.swing.JFrame {
         new PlaceOrder(email).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnViewBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewBillActionPerformed
         // TODO add your handling code here:
         new ViewBillsOrderDetails().setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnViewBillActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -224,6 +242,16 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         new ChangeSecurityQuestion(email).setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        new GiveReview().setVisible(true);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        new SeeReviews().setVisible(true);
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,14 +292,15 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnCategory;
     private javax.swing.JButton btnNewProduct;
     private javax.swing.JButton btnVerifyUsers;
+    private javax.swing.JButton btnViewBill;
     private javax.swing.JButton btnViewEditDelete;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
